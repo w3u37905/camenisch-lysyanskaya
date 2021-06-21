@@ -32,6 +32,7 @@ import edu.jhu.isi.CLSign.sign.Signature;
 import edu.jhu.isi.CLSign.verify.Verify;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
+import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.field.z.ZrElement;
 
 import java.util.ArrayList;
@@ -39,9 +40,10 @@ import java.util.List;
 
 public class CLSign {
     public static KeyPair keyGen(final int messageSize) {
-        final Pairing pairing = KeyGen.createPairing();
+        final PairingParameters params = KeyGen.createPairingParams();
+        final Pairing pairing = KeyGen.getPairing(params);
         final SecretKey sk = KeyGen.createSecretKey(pairing, messageSize);
-        final PublicKey pk = KeyGen.createPublicKey(pairing, sk);
+        final PublicKey pk = KeyGen.createPublicKey(pairing, params, sk);
         return new KeyPair(pk, sk);
     }
 
