@@ -50,8 +50,6 @@ public class KeyGen {
     }
 
     public static  Pairing getPairing(PairingParameters params) {
-        PairingFactory.getInstance().setReuseInstance(true);
-        PairingFactory.getInstance().setUsePBCWhenPossible(false);
         return PairingFactory.getPairing(params);
     }
 }
